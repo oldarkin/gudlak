@@ -1,1 +1,30 @@
-﻿
+﻿<div id="mainMenu">
+    <ul id="menu">
+        <li>
+            <a href="@Url.Action("Index","Dispatcher")">Расстоновка</a>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "Order")">Путевые листы</a>
+        </li>
+        <li>
+            <a href="@Url.Action("Index","Route")">Маршруты</a>
+        </li>
+        <li>
+            Справочники
+            <ul>
+                <li>
+                    <a href="@Url.Action("Index","Drivers")">Водители</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index","Cars")">Автомобили</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index","Customer")">Клиенты</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index","Staff")">Сотрудники</a>,
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

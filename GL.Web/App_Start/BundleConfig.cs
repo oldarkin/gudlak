@@ -23,9 +23,22 @@ namespace GL.Web
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/kendo-all").Include(
+                        "~/Scripts/kendo/js/jszip.min.js",
+                        "~/Scripts/kendo/js/kendo.all.min.js"
+                ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/kendo-styles").Include(
+                      "~/Scripts/kendo/styles/kendo.common.min.css",
+                      "~/Scripts/kendo/styles/kendo.rtl.min.css",
+                      "~/Scripts/kendo/styles/kendo.default.min.css",
+                      "~/Scripts/kendo/styles/kendo.dataviz.min.css",
+                      "~/Scripts/kendo/styles/kendo.dataviz.default.min.css"));
+
         }
     }
 }
