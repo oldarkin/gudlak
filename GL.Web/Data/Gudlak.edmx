@@ -1,0 +1,1291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="gudlakModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cars">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fullname" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="shortname" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="reg_number" Type="varchar" MaxLength="24" Nullable="false" />
+          <Property Name="carstypeid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CarsAP">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="carsid" Type="int" Nullable="false" />
+          <Property Name="date_from" Type="datetime" Nullable="false" />
+          <Property Name="date_to" Type="datetime" Nullable="false" />
+          <Property Name="info" Type="varchar" MaxLength="4000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CarsToDrivers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="carsid" Type="int" Nullable="false" />
+          <Property Name="driversid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CarsType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fullname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="shortname" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="postal_address" Type="varchar" MaxLength="255" />
+          <Property Name="fact_address" Type="varchar" MaxLength="255" />
+          <Property Name="phone" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="Drivers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="patronymic" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="tab_number" Type="varchar" MaxLength="24" Nullable="false" />
+          <Property Name="birthday" Type="date" />
+          <Property Name="prava" Type="varchar" MaxLength="64" />
+          <Property Name="passport_ser" Type="varchar" MaxLength="10" />
+          <Property Name="passport_num" Type="varchar" MaxLength="10" />
+          <Property Name="passport_info" Type="varchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="DriversAP">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="driversid" Type="int" Nullable="false" />
+          <Property Name="date_from" Type="datetime" Nullable="false" />
+          <Property Name="date_to" Type="datetime" Nullable="false" />
+          <Property Name="info" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="customerid" Type="int" Nullable="false" />
+          <Property Name="order_number" Type="int" Nullable="false" />
+          <Property Name="order_date" Type="date" Nullable="false" />
+          <Property Name="statusid" Type="int" Nullable="false" />
+          <Property Name="driversid" Type="int" />
+          <Property Name="carsid" Type="int" />
+          <Property Name="repeat" Type="bit" />
+          <Property Name="create_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="OrdersCarsMileage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ordersid" Type="int" Nullable="false" />
+          <Property Name="carsid" Type="int" Nullable="false" />
+          <Property Name="date_order" Type="date" />
+          <Property Name="time_order" Type="time" Precision="7" />
+          <Property Name="start_mileage" Type="int" />
+          <Property Name="end_mileage" Type="int" />
+        </EntityType>
+        <EntityType Name="OrdersRepeat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ordersid" Type="int" Nullable="false" />
+          <Property Name="repeat_one" Type="bit" />
+          <Property Name="repeat_two" Type="bit" />
+          <Property Name="repeat_three" Type="bit" />
+          <Property Name="repeat_four" Type="bit" />
+          <Property Name="repeat_five" Type="bit" />
+          <Property Name="repeat_six" Type="bit" />
+          <Property Name="repeat_seven" Type="bit" />
+        </EntityType>
+        <EntityType Name="OrdersRoutes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="orders_id" Type="int" Nullable="false" />
+          <Property Name="route_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="statusname" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Route">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="customerid" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="64" />
+          <Property Name="start_path" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="end_path" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="RouteTC">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="routeid" Type="int" Nullable="false" />
+          <Property Name="date_for" Type="date" Nullable="false" />
+          <Property Name="time_from" Type="time" Precision="7" Nullable="false" />
+          <Property Name="time_to" Type="time" Precision="7" />
+          <Property Name="info" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="RouteTime">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="routeid" Type="int" Nullable="false" />
+          <Property Name="time_default_from" Type="time" Precision="7" />
+          <Property Name="time_default_to" Type="time" Precision="7" />
+          <Property Name="time_one" Type="bit" />
+          <Property Name="time_one_from" Type="time" Precision="7" />
+          <Property Name="time_one_to" Type="time" Precision="7" />
+          <Property Name="time_two" Type="bit" />
+          <Property Name="time_two_from" Type="time" Precision="7" />
+          <Property Name="time_two_to" Type="time" Precision="7" />
+          <Property Name="time_three" Type="bit" />
+          <Property Name="time_three_from" Type="time" Precision="7" />
+          <Property Name="time_three_to" Type="time" Precision="7" />
+          <Property Name="time_four" Type="bit" />
+          <Property Name="time_four_from" Type="time" Precision="7" />
+          <Property Name="time_four_to" Type="time" Precision="7" />
+          <Property Name="time_five" Type="bit" />
+          <Property Name="time_five_from" Type="time" Precision="7" />
+          <Property Name="time_five_to" Type="time" Precision="7" />
+          <Property Name="time_six" Type="bit" />
+          <Property Name="time_six_from" Type="time" Precision="7" />
+          <Property Name="time_six_to" Type="time" Precision="7" />
+          <Property Name="time_seven" Type="bit" />
+          <Property Name="time_seven_from" Type="time" Precision="7" />
+          <Property Name="time_seven_to" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="stafftypeid" Type="int" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="patronymic" Type="varchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StaffType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <Association Name="FK__Cars__carstypeid__1273C1CD">
+          <End Role="CarsType" Type="Self.CarsType" Multiplicity="1" />
+          <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarsType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cars">
+              <PropertyRef Name="carstypeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CarsAP__carsid__15502E78">
+          <End Role="Cars" Type="Self.Cars" Multiplicity="1" />
+          <End Role="CarsAP" Type="Self.CarsAP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CarsAP">
+              <PropertyRef Name="carsid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CarsToDri__carsi__1CF15040">
+          <End Role="Cars" Type="Self.Cars" Multiplicity="1" />
+          <End Role="CarsToDrivers" Type="Self.CarsToDrivers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CarsToDrivers">
+              <PropertyRef Name="carsid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CarsToDri__drive__1DE57479">
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="1" />
+          <End Role="CarsToDrivers" Type="Self.CarsToDrivers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CarsToDrivers">
+              <PropertyRef Name="driversid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DriversAP__drive__1A14E395">
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="1" />
+          <End Role="DriversAP" Type="Self.DriversAP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DriversAP">
+              <PropertyRef Name="driversid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__carsid__300424B4">
+          <End Role="Cars" Type="Self.Cars" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="carsid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__customer__2D27B809">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="customerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__driversi__2F10007B">
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="driversid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__statusid__2E1BDC42">
+          <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="statusid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdersCar__carsi__3A81B327">
+          <End Role="Cars" Type="Self.Cars" Multiplicity="1" />
+          <End Role="OrdersCarsMileage" Type="Self.OrdersCarsMileage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrdersCarsMileage">
+              <PropertyRef Name="carsid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdersCar__order__398D8EEE">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrdersCarsMileage" Type="Self.OrdersCarsMileage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrdersCarsMileage">
+              <PropertyRef Name="ordersid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdersRep__order__32E0915F">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrdersRepeat" Type="Self.OrdersRepeat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrdersRepeat">
+              <PropertyRef Name="ordersid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdersRou__order__35BCFE0A">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrdersRoutes" Type="Self.OrdersRoutes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrdersRoutes">
+              <PropertyRef Name="orders_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdersRou__route__36B12243">
+          <End Role="Route" Type="Self.Route" Multiplicity="1" />
+          <End Role="OrdersRoutes" Type="Self.OrdersRoutes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrdersRoutes">
+              <PropertyRef Name="route_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Route__customeri__22AA2996">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="customerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RouteTC__routeid__286302EC">
+          <End Role="Route" Type="Self.Route" Multiplicity="1" />
+          <End Role="RouteTC" Type="Self.RouteTC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RouteTC">
+              <PropertyRef Name="routeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RouteTime__route__25869641">
+          <End Role="Route" Type="Self.Route" Multiplicity="1" />
+          <End Role="RouteTime" Type="Self.RouteTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RouteTime">
+              <PropertyRef Name="routeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Staff__stafftype__3F466844">
+          <End Role="StaffType" Type="Self.StaffType" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StaffType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="stafftypeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="gudlakModelStoreContainer">
+          <EntitySet Name="Cars" EntityType="Self.Cars" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarsAP" EntityType="Self.CarsAP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarsToDrivers" EntityType="Self.CarsToDrivers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarsType" EntityType="Self.CarsType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Drivers" EntityType="Self.Drivers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DriversAP" EntityType="Self.DriversAP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdersCarsMileage" EntityType="Self.OrdersCarsMileage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdersRepeat" EntityType="Self.OrdersRepeat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdersRoutes" EntityType="Self.OrdersRoutes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Route" EntityType="Self.Route" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RouteTC" EntityType="Self.RouteTC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RouteTime" EntityType="Self.RouteTime" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StaffType" EntityType="Self.StaffType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Cars__carstypeid__1273C1CD" Association="Self.FK__Cars__carstypeid__1273C1CD">
+            <End Role="CarsType" EntitySet="CarsType" />
+            <End Role="Cars" EntitySet="Cars" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CarsAP__carsid__15502E78" Association="Self.FK__CarsAP__carsid__15502E78">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="CarsAP" EntitySet="CarsAP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CarsToDri__carsi__1CF15040" Association="Self.FK__CarsToDri__carsi__1CF15040">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="CarsToDrivers" EntitySet="CarsToDrivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CarsToDri__drive__1DE57479" Association="Self.FK__CarsToDri__drive__1DE57479">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="CarsToDrivers" EntitySet="CarsToDrivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DriversAP__drive__1A14E395" Association="Self.FK__DriversAP__drive__1A14E395">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="DriversAP" EntitySet="DriversAP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__carsid__300424B4" Association="Self.FK__Orders__carsid__300424B4">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__customer__2D27B809" Association="Self.FK__Orders__customer__2D27B809">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__driversi__2F10007B" Association="Self.FK__Orders__driversi__2F10007B">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__statusid__2E1BDC42" Association="Self.FK__Orders__statusid__2E1BDC42">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdersCar__carsi__3A81B327" Association="Self.FK__OrdersCar__carsi__3A81B327">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="OrdersCarsMileage" EntitySet="OrdersCarsMileage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdersCar__order__398D8EEE" Association="Self.FK__OrdersCar__order__398D8EEE">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrdersCarsMileage" EntitySet="OrdersCarsMileage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdersRep__order__32E0915F" Association="Self.FK__OrdersRep__order__32E0915F">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrdersRepeat" EntitySet="OrdersRepeat" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdersRou__order__35BCFE0A" Association="Self.FK__OrdersRou__order__35BCFE0A">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrdersRoutes" EntitySet="OrdersRoutes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdersRou__route__36B12243" Association="Self.FK__OrdersRou__route__36B12243">
+            <End Role="Route" EntitySet="Route" />
+            <End Role="OrdersRoutes" EntitySet="OrdersRoutes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Route__customeri__22AA2996" Association="Self.FK__Route__customeri__22AA2996">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RouteTC__routeid__286302EC" Association="Self.FK__RouteTC__routeid__286302EC">
+            <End Role="Route" EntitySet="Route" />
+            <End Role="RouteTC" EntitySet="RouteTC" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RouteTime__route__25869641" Association="Self.FK__RouteTime__route__25869641">
+            <End Role="Route" EntitySet="Route" />
+            <End Role="RouteTime" EntitySet="RouteTime" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Staff__stafftype__3F466844" Association="Self.FK__Staff__stafftype__3F466844">
+            <End Role="StaffType" EntitySet="StaffType" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="gudlakModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cars">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fullname" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="shortname" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="reg_number" Type="String" MaxLength="24" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="carstypeid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CarsType" Relationship="Self.FK__Cars__carstypeid__1273C1CD" FromRole="Cars" ToRole="CarsType" />
+          <NavigationProperty Name="CarsAP" Relationship="Self.FK__CarsAP__carsid__15502E78" FromRole="Cars" ToRole="CarsAP" />
+          <NavigationProperty Name="CarsToDrivers" Relationship="Self.FK__CarsToDri__carsi__1CF15040" FromRole="Cars" ToRole="CarsToDrivers" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__carsid__300424B4" FromRole="Cars" ToRole="Orders" />
+          <NavigationProperty Name="OrdersCarsMileage" Relationship="Self.FK__OrdersCar__carsi__3A81B327" FromRole="Cars" ToRole="OrdersCarsMileage" />
+        </EntityType>
+        <EntityType Name="CarsAP">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="carsid" Type="Int32" Nullable="false" />
+          <Property Name="date_from" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="date_to" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="info" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Cars" Relationship="Self.FK__CarsAP__carsid__15502E78" FromRole="CarsAP" ToRole="Cars" />
+        </EntityType>
+        <EntityType Name="CarsToDrivers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="carsid" Type="Int32" Nullable="false" />
+          <Property Name="driversid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cars" Relationship="Self.FK__CarsToDri__carsi__1CF15040" FromRole="CarsToDrivers" ToRole="Cars" />
+          <NavigationProperty Name="Drivers" Relationship="Self.FK__CarsToDri__drive__1DE57479" FromRole="CarsToDrivers" ToRole="Drivers" />
+        </EntityType>
+        <EntityType Name="CarsType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cars" Relationship="Self.FK__Cars__carstypeid__1273C1CD" FromRole="CarsType" ToRole="Cars" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fullname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="shortname" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="postal_address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="fact_address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__customer__2D27B809" FromRole="Customer" ToRole="Orders" />
+          <NavigationProperty Name="Route" Relationship="Self.FK__Route__customeri__22AA2996" FromRole="Customer" ToRole="Route" />
+        </EntityType>
+        <EntityType Name="Drivers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="surname" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="patronymic" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tab_number" Type="String" MaxLength="24" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="birthday" Type="DateTime" Precision="0" />
+          <Property Name="prava" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="passport_ser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="passport_num" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="passport_info" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CarsToDrivers" Relationship="Self.FK__CarsToDri__drive__1DE57479" FromRole="Drivers" ToRole="CarsToDrivers" />
+          <NavigationProperty Name="DriversAP" Relationship="Self.FK__DriversAP__drive__1A14E395" FromRole="Drivers" ToRole="DriversAP" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__driversi__2F10007B" FromRole="Drivers" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="DriversAP">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="driversid" Type="Int32" Nullable="false" />
+          <Property Name="date_from" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="date_to" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="info" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Drivers" Relationship="Self.FK__DriversAP__drive__1A14E395" FromRole="DriversAP" ToRole="Drivers" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customerid" Type="Int32" Nullable="false" />
+          <Property Name="order_number" Type="Int32" Nullable="false" />
+          <Property Name="order_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="statusid" Type="Int32" Nullable="false" />
+          <Property Name="driversid" Type="Int32" />
+          <Property Name="carsid" Type="Int32" />
+          <Property Name="repeat" Type="Boolean" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Cars" Relationship="Self.FK__Orders__carsid__300424B4" FromRole="Orders" ToRole="Cars" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Orders__customer__2D27B809" FromRole="Orders" ToRole="Customer" />
+          <NavigationProperty Name="Drivers" Relationship="Self.FK__Orders__driversi__2F10007B" FromRole="Orders" ToRole="Drivers" />
+          <NavigationProperty Name="OrderStatus" Relationship="Self.FK__Orders__statusid__2E1BDC42" FromRole="Orders" ToRole="OrderStatus" />
+          <NavigationProperty Name="OrdersCarsMileage" Relationship="Self.FK__OrdersCar__order__398D8EEE" FromRole="Orders" ToRole="OrdersCarsMileage" />
+          <NavigationProperty Name="OrdersRepeat" Relationship="Self.FK__OrdersRep__order__32E0915F" FromRole="Orders" ToRole="OrdersRepeat" />
+          <NavigationProperty Name="OrdersRoutes" Relationship="Self.FK__OrdersRou__order__35BCFE0A" FromRole="Orders" ToRole="OrdersRoutes" />
+        </EntityType>
+        <EntityType Name="OrdersCarsMileage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ordersid" Type="Int32" Nullable="false" />
+          <Property Name="carsid" Type="Int32" Nullable="false" />
+          <Property Name="date_order" Type="DateTime" Precision="0" />
+          <Property Name="time_order" Type="Time" Precision="7" />
+          <Property Name="start_mileage" Type="Int32" />
+          <Property Name="end_mileage" Type="Int32" />
+          <NavigationProperty Name="Cars" Relationship="Self.FK__OrdersCar__carsi__3A81B327" FromRole="OrdersCarsMileage" ToRole="Cars" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__OrdersCar__order__398D8EEE" FromRole="OrdersCarsMileage" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="OrdersRepeat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ordersid" Type="Int32" Nullable="false" />
+          <Property Name="repeat_one" Type="Boolean" />
+          <Property Name="repeat_two" Type="Boolean" />
+          <Property Name="repeat_three" Type="Boolean" />
+          <Property Name="repeat_four" Type="Boolean" />
+          <Property Name="repeat_five" Type="Boolean" />
+          <Property Name="repeat_six" Type="Boolean" />
+          <Property Name="repeat_seven" Type="Boolean" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__OrdersRep__order__32E0915F" FromRole="OrdersRepeat" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="OrdersRoutes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="orders_id" Type="Int32" Nullable="false" />
+          <Property Name="route_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__OrdersRou__order__35BCFE0A" FromRole="OrdersRoutes" ToRole="Orders" />
+          <NavigationProperty Name="Route" Relationship="Self.FK__OrdersRou__route__36B12243" FromRole="OrdersRoutes" ToRole="Route" />
+        </EntityType>
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="statusname" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__statusid__2E1BDC42" FromRole="OrderStatus" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Route">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customerid" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="start_path" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="end_path" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Route__customeri__22AA2996" FromRole="Route" ToRole="Customer" />
+          <NavigationProperty Name="OrdersRoutes" Relationship="Self.FK__OrdersRou__route__36B12243" FromRole="Route" ToRole="OrdersRoutes" />
+          <NavigationProperty Name="RouteTC" Relationship="Self.FK__RouteTC__routeid__286302EC" FromRole="Route" ToRole="RouteTC" />
+          <NavigationProperty Name="RouteTime" Relationship="Self.FK__RouteTime__route__25869641" FromRole="Route" ToRole="RouteTime" />
+        </EntityType>
+        <EntityType Name="RouteTC">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="routeid" Type="Int32" Nullable="false" />
+          <Property Name="date_for" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="time_from" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="time_to" Type="Time" Precision="7" />
+          <Property Name="info" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Route" Relationship="Self.FK__RouteTC__routeid__286302EC" FromRole="RouteTC" ToRole="Route" />
+        </EntityType>
+        <EntityType Name="RouteTime">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="routeid" Type="Int32" Nullable="false" />
+          <Property Name="time_default_from" Type="Time" Precision="7" />
+          <Property Name="time_default_to" Type="Time" Precision="7" />
+          <Property Name="time_one" Type="Boolean" />
+          <Property Name="time_one_from" Type="Time" Precision="7" />
+          <Property Name="time_one_to" Type="Time" Precision="7" />
+          <Property Name="time_two" Type="Boolean" />
+          <Property Name="time_two_from" Type="Time" Precision="7" />
+          <Property Name="time_two_to" Type="Time" Precision="7" />
+          <Property Name="time_three" Type="Boolean" />
+          <Property Name="time_three_from" Type="Time" Precision="7" />
+          <Property Name="time_three_to" Type="Time" Precision="7" />
+          <Property Name="time_four" Type="Boolean" />
+          <Property Name="time_four_from" Type="Time" Precision="7" />
+          <Property Name="time_four_to" Type="Time" Precision="7" />
+          <Property Name="time_five" Type="Boolean" />
+          <Property Name="time_five_from" Type="Time" Precision="7" />
+          <Property Name="time_five_to" Type="Time" Precision="7" />
+          <Property Name="time_six" Type="Boolean" />
+          <Property Name="time_six_from" Type="Time" Precision="7" />
+          <Property Name="time_six_to" Type="Time" Precision="7" />
+          <Property Name="time_seven" Type="Boolean" />
+          <Property Name="time_seven_from" Type="Time" Precision="7" />
+          <Property Name="time_seven_to" Type="Time" Precision="7" />
+          <NavigationProperty Name="Route" Relationship="Self.FK__RouteTime__route__25869641" FromRole="RouteTime" ToRole="Route" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="stafftypeid" Type="Int32" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="patronymic" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="StaffType" Relationship="Self.FK__Staff__stafftype__3F466844" FromRole="Staff" ToRole="StaffType" />
+        </EntityType>
+        <EntityType Name="StaffType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK__Staff__stafftype__3F466844" FromRole="StaffType" ToRole="Staff" />
+        </EntityType>
+        <Association Name="FK__Cars__carstypeid__1273C1CD">
+          <End Role="CarsType" Type="Self.CarsType" Multiplicity="1" />
+          <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarsType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cars">
+              <PropertyRef Name="carstypeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CarsAP__carsid__15502E78">
+          <End Role="Cars" Type="Self.Cars" Multiplicity="1" />
+          <End Role="CarsAP" Type="Self.CarsAP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CarsAP">
+              <PropertyRef Name="carsid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CarsToDri__carsi__1CF15040">
+          <End Role="Cars" Type="Self.Cars" Multiplicity="1" />
+          <End Role="CarsToDrivers" Type="Self.CarsToDrivers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CarsToDrivers">
+              <PropertyRef Name="carsid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__carsid__300424B4">
+          <End Role="Cars" Type="Self.Cars" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="carsid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdersCar__carsi__3A81B327">
+          <End Role="Cars" Type="Self.Cars" Multiplicity="1" />
+          <End Role="OrdersCarsMileage" Type="Self.OrdersCarsMileage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrdersCarsMileage">
+              <PropertyRef Name="carsid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CarsToDri__drive__1DE57479">
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="1" />
+          <End Role="CarsToDrivers" Type="Self.CarsToDrivers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CarsToDrivers">
+              <PropertyRef Name="driversid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__customer__2D27B809">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="customerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Route__customeri__22AA2996">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="customerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DriversAP__drive__1A14E395">
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="1" />
+          <End Role="DriversAP" Type="Self.DriversAP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DriversAP">
+              <PropertyRef Name="driversid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__driversi__2F10007B">
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="driversid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__statusid__2E1BDC42">
+          <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="statusid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdersCar__order__398D8EEE">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrdersCarsMileage" Type="Self.OrdersCarsMileage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrdersCarsMileage">
+              <PropertyRef Name="ordersid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdersRep__order__32E0915F">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrdersRepeat" Type="Self.OrdersRepeat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrdersRepeat">
+              <PropertyRef Name="ordersid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdersRou__order__35BCFE0A">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrdersRoutes" Type="Self.OrdersRoutes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrdersRoutes">
+              <PropertyRef Name="orders_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrdersRou__route__36B12243">
+          <End Role="Route" Type="Self.Route" Multiplicity="1" />
+          <End Role="OrdersRoutes" Type="Self.OrdersRoutes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrdersRoutes">
+              <PropertyRef Name="route_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RouteTC__routeid__286302EC">
+          <End Role="Route" Type="Self.Route" Multiplicity="1" />
+          <End Role="RouteTC" Type="Self.RouteTC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RouteTC">
+              <PropertyRef Name="routeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RouteTime__route__25869641">
+          <End Role="Route" Type="Self.Route" Multiplicity="1" />
+          <End Role="RouteTime" Type="Self.RouteTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RouteTime">
+              <PropertyRef Name="routeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Staff__stafftype__3F466844">
+          <End Role="StaffType" Type="Self.StaffType" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StaffType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="stafftypeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="gudlakEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cars" EntityType="Self.Cars" />
+          <EntitySet Name="CarsAP" EntityType="Self.CarsAP" />
+          <EntitySet Name="CarsToDrivers" EntityType="Self.CarsToDrivers" />
+          <EntitySet Name="CarsType" EntityType="Self.CarsType" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" />
+          <EntitySet Name="Drivers" EntityType="Self.Drivers" />
+          <EntitySet Name="DriversAP" EntityType="Self.DriversAP" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" />
+          <EntitySet Name="OrdersCarsMileage" EntityType="Self.OrdersCarsMileage" />
+          <EntitySet Name="OrdersRepeat" EntityType="Self.OrdersRepeat" />
+          <EntitySet Name="OrdersRoutes" EntityType="Self.OrdersRoutes" />
+          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" />
+          <EntitySet Name="Route" EntityType="Self.Route" />
+          <EntitySet Name="RouteTC" EntityType="Self.RouteTC" />
+          <EntitySet Name="RouteTime" EntityType="Self.RouteTime" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" />
+          <EntitySet Name="StaffType" EntityType="Self.StaffType" />
+          <AssociationSet Name="FK__Cars__carstypeid__1273C1CD" Association="Self.FK__Cars__carstypeid__1273C1CD">
+            <End Role="CarsType" EntitySet="CarsType" />
+            <End Role="Cars" EntitySet="Cars" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CarsAP__carsid__15502E78" Association="Self.FK__CarsAP__carsid__15502E78">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="CarsAP" EntitySet="CarsAP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CarsToDri__carsi__1CF15040" Association="Self.FK__CarsToDri__carsi__1CF15040">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="CarsToDrivers" EntitySet="CarsToDrivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__carsid__300424B4" Association="Self.FK__Orders__carsid__300424B4">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdersCar__carsi__3A81B327" Association="Self.FK__OrdersCar__carsi__3A81B327">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="OrdersCarsMileage" EntitySet="OrdersCarsMileage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CarsToDri__drive__1DE57479" Association="Self.FK__CarsToDri__drive__1DE57479">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="CarsToDrivers" EntitySet="CarsToDrivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__customer__2D27B809" Association="Self.FK__Orders__customer__2D27B809">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Route__customeri__22AA2996" Association="Self.FK__Route__customeri__22AA2996">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DriversAP__drive__1A14E395" Association="Self.FK__DriversAP__drive__1A14E395">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="DriversAP" EntitySet="DriversAP" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__driversi__2F10007B" Association="Self.FK__Orders__driversi__2F10007B">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__statusid__2E1BDC42" Association="Self.FK__Orders__statusid__2E1BDC42">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdersCar__order__398D8EEE" Association="Self.FK__OrdersCar__order__398D8EEE">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrdersCarsMileage" EntitySet="OrdersCarsMileage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdersRep__order__32E0915F" Association="Self.FK__OrdersRep__order__32E0915F">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrdersRepeat" EntitySet="OrdersRepeat" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdersRou__order__35BCFE0A" Association="Self.FK__OrdersRou__order__35BCFE0A">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrdersRoutes" EntitySet="OrdersRoutes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrdersRou__route__36B12243" Association="Self.FK__OrdersRou__route__36B12243">
+            <End Role="Route" EntitySet="Route" />
+            <End Role="OrdersRoutes" EntitySet="OrdersRoutes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RouteTC__routeid__286302EC" Association="Self.FK__RouteTC__routeid__286302EC">
+            <End Role="Route" EntitySet="Route" />
+            <End Role="RouteTC" EntitySet="RouteTC" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RouteTime__route__25869641" Association="Self.FK__RouteTime__route__25869641">
+            <End Role="Route" EntitySet="Route" />
+            <End Role="RouteTime" EntitySet="RouteTime" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Staff__stafftype__3F466844" Association="Self.FK__Staff__stafftype__3F466844">
+            <End Role="StaffType" EntitySet="StaffType" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="gudlakModelStoreContainer" CdmEntityContainer="gudlakEntities1">
+          <EntitySetMapping Name="Cars">
+            <EntityTypeMapping TypeName="gudlakModel.Cars">
+              <MappingFragment StoreEntitySet="Cars">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="shortname" ColumnName="shortname" />
+                <ScalarProperty Name="reg_number" ColumnName="reg_number" />
+                <ScalarProperty Name="carstypeid" ColumnName="carstypeid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarsAP">
+            <EntityTypeMapping TypeName="gudlakModel.CarsAP">
+              <MappingFragment StoreEntitySet="CarsAP">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="carsid" ColumnName="carsid" />
+                <ScalarProperty Name="date_from" ColumnName="date_from" />
+                <ScalarProperty Name="date_to" ColumnName="date_to" />
+                <ScalarProperty Name="info" ColumnName="info" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarsToDrivers">
+            <EntityTypeMapping TypeName="gudlakModel.CarsToDrivers">
+              <MappingFragment StoreEntitySet="CarsToDrivers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="carsid" ColumnName="carsid" />
+                <ScalarProperty Name="driversid" ColumnName="driversid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarsType">
+            <EntityTypeMapping TypeName="gudlakModel.CarsType">
+              <MappingFragment StoreEntitySet="CarsType">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="gudlakModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="shortname" ColumnName="shortname" />
+                <ScalarProperty Name="postal_address" ColumnName="postal_address" />
+                <ScalarProperty Name="fact_address" ColumnName="fact_address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Drivers">
+            <EntityTypeMapping TypeName="gudlakModel.Drivers">
+              <MappingFragment StoreEntitySet="Drivers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+                <ScalarProperty Name="tab_number" ColumnName="tab_number" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="prava" ColumnName="prava" />
+                <ScalarProperty Name="passport_ser" ColumnName="passport_ser" />
+                <ScalarProperty Name="passport_num" ColumnName="passport_num" />
+                <ScalarProperty Name="passport_info" ColumnName="passport_info" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DriversAP">
+            <EntityTypeMapping TypeName="gudlakModel.DriversAP">
+              <MappingFragment StoreEntitySet="DriversAP">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="driversid" ColumnName="driversid" />
+                <ScalarProperty Name="date_from" ColumnName="date_from" />
+                <ScalarProperty Name="date_to" ColumnName="date_to" />
+                <ScalarProperty Name="info" ColumnName="info" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="gudlakModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="customerid" ColumnName="customerid" />
+                <ScalarProperty Name="order_number" ColumnName="order_number" />
+                <ScalarProperty Name="order_date" ColumnName="order_date" />
+                <ScalarProperty Name="statusid" ColumnName="statusid" />
+                <ScalarProperty Name="driversid" ColumnName="driversid" />
+                <ScalarProperty Name="carsid" ColumnName="carsid" />
+                <ScalarProperty Name="repeat" ColumnName="repeat" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdersCarsMileage">
+            <EntityTypeMapping TypeName="gudlakModel.OrdersCarsMileage">
+              <MappingFragment StoreEntitySet="OrdersCarsMileage">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ordersid" ColumnName="ordersid" />
+                <ScalarProperty Name="carsid" ColumnName="carsid" />
+                <ScalarProperty Name="date_order" ColumnName="date_order" />
+                <ScalarProperty Name="time_order" ColumnName="time_order" />
+                <ScalarProperty Name="start_mileage" ColumnName="start_mileage" />
+                <ScalarProperty Name="end_mileage" ColumnName="end_mileage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdersRepeat">
+            <EntityTypeMapping TypeName="gudlakModel.OrdersRepeat">
+              <MappingFragment StoreEntitySet="OrdersRepeat">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ordersid" ColumnName="ordersid" />
+                <ScalarProperty Name="repeat_one" ColumnName="repeat_one" />
+                <ScalarProperty Name="repeat_two" ColumnName="repeat_two" />
+                <ScalarProperty Name="repeat_three" ColumnName="repeat_three" />
+                <ScalarProperty Name="repeat_four" ColumnName="repeat_four" />
+                <ScalarProperty Name="repeat_five" ColumnName="repeat_five" />
+                <ScalarProperty Name="repeat_six" ColumnName="repeat_six" />
+                <ScalarProperty Name="repeat_seven" ColumnName="repeat_seven" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdersRoutes">
+            <EntityTypeMapping TypeName="gudlakModel.OrdersRoutes">
+              <MappingFragment StoreEntitySet="OrdersRoutes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="orders_id" ColumnName="orders_id" />
+                <ScalarProperty Name="route_id" ColumnName="route_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderStatus">
+            <EntityTypeMapping TypeName="gudlakModel.OrderStatus">
+              <MappingFragment StoreEntitySet="OrderStatus">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="statusname" ColumnName="statusname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Route">
+            <EntityTypeMapping TypeName="gudlakModel.Route">
+              <MappingFragment StoreEntitySet="Route">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="customerid" ColumnName="customerid" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="start_path" ColumnName="start_path" />
+                <ScalarProperty Name="end_path" ColumnName="end_path" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RouteTC">
+            <EntityTypeMapping TypeName="gudlakModel.RouteTC">
+              <MappingFragment StoreEntitySet="RouteTC">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="routeid" ColumnName="routeid" />
+                <ScalarProperty Name="date_for" ColumnName="date_for" />
+                <ScalarProperty Name="time_from" ColumnName="time_from" />
+                <ScalarProperty Name="time_to" ColumnName="time_to" />
+                <ScalarProperty Name="info" ColumnName="info" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RouteTime">
+            <EntityTypeMapping TypeName="gudlakModel.RouteTime">
+              <MappingFragment StoreEntitySet="RouteTime">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="routeid" ColumnName="routeid" />
+                <ScalarProperty Name="time_default_from" ColumnName="time_default_from" />
+                <ScalarProperty Name="time_default_to" ColumnName="time_default_to" />
+                <ScalarProperty Name="time_one" ColumnName="time_one" />
+                <ScalarProperty Name="time_one_from" ColumnName="time_one_from" />
+                <ScalarProperty Name="time_one_to" ColumnName="time_one_to" />
+                <ScalarProperty Name="time_two" ColumnName="time_two" />
+                <ScalarProperty Name="time_two_from" ColumnName="time_two_from" />
+                <ScalarProperty Name="time_two_to" ColumnName="time_two_to" />
+                <ScalarProperty Name="time_three" ColumnName="time_three" />
+                <ScalarProperty Name="time_three_from" ColumnName="time_three_from" />
+                <ScalarProperty Name="time_three_to" ColumnName="time_three_to" />
+                <ScalarProperty Name="time_four" ColumnName="time_four" />
+                <ScalarProperty Name="time_four_from" ColumnName="time_four_from" />
+                <ScalarProperty Name="time_four_to" ColumnName="time_four_to" />
+                <ScalarProperty Name="time_five" ColumnName="time_five" />
+                <ScalarProperty Name="time_five_from" ColumnName="time_five_from" />
+                <ScalarProperty Name="time_five_to" ColumnName="time_five_to" />
+                <ScalarProperty Name="time_six" ColumnName="time_six" />
+                <ScalarProperty Name="time_six_from" ColumnName="time_six_from" />
+                <ScalarProperty Name="time_six_to" ColumnName="time_six_to" />
+                <ScalarProperty Name="time_seven" ColumnName="time_seven" />
+                <ScalarProperty Name="time_seven_from" ColumnName="time_seven_from" />
+                <ScalarProperty Name="time_seven_to" ColumnName="time_seven_to" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staff">
+            <EntityTypeMapping TypeName="gudlakModel.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="stafftypeid" ColumnName="stafftypeid" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StaffType">
+            <EntityTypeMapping TypeName="gudlakModel.StaffType">
+              <MappingFragment StoreEntitySet="StaffType">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

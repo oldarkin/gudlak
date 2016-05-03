@@ -1,12 +1,9 @@
-﻿using GL.Model;
-using DAL=GL.DAL;
-using NHibernate;
-using NHibernate.Transform;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using GL.Web.Data;
 
 namespace GL.Web.Controllers
 {
@@ -14,21 +11,11 @@ namespace GL.Web.Controllers
     {
         public ActionResult Index()
         {
-
-            DAL.CarsType ct = new DAL.CarsType();
-
-            var ctList = ct.GetAll();
-
-            var ctCur = ct.GetByID<CarsType>().Where(data => data.Id == 1);
-
-            CarsType newCT = new CarsType();
-            newCT.Id = 0;
-            newCT.Name = "asda1212sdasdasd";
-
-            ct.Insert(newCT);
-
-            Guid gd = new Guid();
-
+            using (var context = new gudlakEntities1())
+            {
+                var data = context.CarsType.ToList();
+                Guid gd = new Guid();
+            }
             return View();
         }
 

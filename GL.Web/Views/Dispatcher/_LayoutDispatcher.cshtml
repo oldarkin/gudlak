@@ -5,68 +5,32 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/kendo-styles")
-    @Scripts.Render("~/bundles/modernizr")
 
-    <style>
-        #megaStore {
-            max-width: 600px;
-            margin: 30px auto;
-            background: url('~/Content/web/menu/header.jpg') no-repeat center 0;
-        }
+    @Styles.Render("~/Content/kendo/css")
+    @*@Styles.Render("~/Content/shared/css")*@
 
-        #menu h2 {
-            font-size: 1em;
-            text-transform: uppercase;
-            padding: 5px 10px;
-        }
-
-        #template img {
-            margin: 5px 20px 0 0;
-            float: left;
-        }
-
-        #template {
-            width: 380px;
-        }
-
-            #template ol {
-                float: left;
-                margin: 0 0 0 30px;
-                padding: 10px 10px 0 10px;
-            }
-
-            #template:after {
-                content: ".";
-                display: block;
-                height: 0;
-                clear: both;
-                visibility: hidden;
-            }
-
-            #template .k-button {
-                float: left;
-                clear: left;
-                margin: 5px 0 5px 12px;
-            }
-    </style>
-
-
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/kendo")
 
 </head>
 <body>
-    
-    @Html.Partial("~/Views/Dispatcher/_MenuDispatcherPartial.cshtml")
 
-    <div>
+    <div class="container">
+        @RenderSection("head", required: false)
+    </div>
+
+    <div class="container-full">
+        @Html.Partial("~/Views/Dispatcher/_MenuDispatcherPartial.cshtml")
+    </div>
+
+    <div class="container-full">
         @RenderBody()
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/kendo-all")
-    <script src="~/Scripts/LayoutDispatcher.js" />
-    @RenderSection("masterjs", required: false)
+    <div class="container">
+        @RenderSection("buttom", required: false)
+    </div>
+
+    @RenderSection("js", required: false)
 </body>
 </html>

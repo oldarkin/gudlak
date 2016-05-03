@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2c41075184b740f28d49969052b3058f" Name="Diagram1">
+        <EntityTypeShape EntityType="gudlakModel.Cars" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="gudlakModel.CarsAP" Width="1.5" PointX="3" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="gudlakModel.CarsToDrivers" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="gudlakModel.CarsType" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="gudlakModel.Customer" Width="1.5" PointX="3.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="gudlakModel.Drivers" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="gudlakModel.DriversAP" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="gudlakModel.Orders" Width="1.5" PointX="6" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="gudlakModel.OrdersCarsMileage" Width="1.5" PointX="8.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="gudlakModel.OrdersRepeat" Width="1.5" PointX="8.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="gudlakModel.OrdersRoutes" Width="1.5" PointX="11.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="gudlakModel.OrderStatus" Width="1.5" PointX="3.75" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="gudlakModel.Route" Width="1.5" PointX="9" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="gudlakModel.RouteTC" Width="1.5" PointX="11.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="gudlakModel.RouteTime" Width="1.5" PointX="11.25" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="gudlakModel.Staff" Width="1.5" PointX="13" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="gudlakModel.StaffType" Width="1.5" PointX="10.75" PointY="11.75" IsExpanded="true" />
+        <AssociationConnector Association="gudlakModel.FK__Cars__carstypeid__1273C1CD" ManuallyRouted="false" />
+        <AssociationConnector Association="gudlakModel.FK__CarsAP__carsid__15502E78" ManuallyRouted="false" />
+        <AssociationConnector Association="gudlakModel.FK__CarsToDri__carsi__1CF15040" ManuallyRouted="false" />
+        <AssociationConnector Association="gudlakModel.FK__Orders__carsid__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="gudlakModel.FK__OrdersCar__carsi__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="gudlakModel.FK__CarsToDri__drive__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="gudlakModel.FK__Orders__customer__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="gudlakModel.FK__Route__customeri__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="gudlakModel.FK__DriversAP__drive__1A14E395" ManuallyRouted="false" />
+        <AssociationConnector Association="gudlakModel.FK__Orders__driversi__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="gudlakModel.FK__Orders__statusid__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="gudlakModel.FK__OrdersCar__order__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="gudlakModel.FK__OrdersRep__order__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="gudlakModel.FK__OrdersRou__order__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="gudlakModel.FK__OrdersRou__route__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="gudlakModel.FK__RouteTC__routeid__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="gudlakModel.FK__RouteTime__route__25869641" ManuallyRouted="false" />
+        <AssociationConnector Association="gudlakModel.FK__Staff__stafftype__3F466844" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

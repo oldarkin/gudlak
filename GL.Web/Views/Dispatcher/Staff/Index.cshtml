@@ -1,8 +1,72 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Dispatcher/_LayoutDispatcher.cshtml";
 }
 
-<h2>Сотрудники</h2>
+@section head
+{
+    <h1>Сотрудники</h1>
+}
 
+<div class="row">
+    <div class="col-md-9">
+        @(Html.Kendo().Grid<GL.Model.StaffView>()
+        .Name("grid")
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.Surname).Title("Фамиилия");
+            columns.Bound(c => c.Name).Title("Имя");
+            columns.Bound(c => c.Patronymic).Title("Отчество").Width(150);
+            columns.ForeignKey(p => p.StaffTypeId, (System.Collections.IEnumerable)ViewData["stafftype"], "StaffTypeId", "Name")
+                        .Title("Тип").Width(200); ;
+        })
+        .HtmlAttributes(new { style = "height: 550px;" })
+        .ToolBar(toolBar =>
+        {
+           toolBar.Create();
+        })
+        .Editable(editable => editable.Mode(GridEditMode.InCell))
+        .Scrollable()
+        .Sortable()
+        .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(5))
+                    .DataSource(dataSource => dataSource
+                .Ajax()
+                .PageSize(20)
+                .ServerOperation(false)
+                .Events(events => events.Error("errorHandler"))
+                .Model(model =>
+                {
+                    model.Id(p => p.StaffId);
+                    //model.Field(p => p.ProductID).Editable(false);
+                    model.Field(p => p.StaffTypeId).DefaultValue(1);
+                })
+                .Read(read => read.Action("StaffRead", "Staff"))
+                .Update(update => update.Action("ForeignKeyColumn_Update", "Grid"))
+                .Create(create => create.Action("ForeignKeyColumn_Create", "Grid"))
+                .Destroy(destroy => destroy.Action("ForeignKeyColumn_Destroy", "Grid"))
+            )
+        )
+    </div>
+</div>
+
+@section js
+{
+    <script type="text/javascript">
+        function errorHandler(e) {
+            if (e.errors) {
+                var message = "Errors:\n";
+                $.each(e.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                alert(message);
+            }
+        }
+    </script>
+}

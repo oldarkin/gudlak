@@ -19,12 +19,6 @@ namespace GL.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            // nHibernate section
-            Configuration configuration = new Configuration();
-            configuration.Configure();
-            GL.DAL.HibernateHelper.SessionFactory = configuration.BuildSessionFactory();
-            //ApplicationCore.SessionFactory = configuration.BuildSessionFactory();
         }
     }
 }
