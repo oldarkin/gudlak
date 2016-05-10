@@ -14,7 +14,9 @@ namespace GL.Web
             bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
                         "~/Scripts/kendo/2016.1.112/kendo.all.min.js",
                         "~/Scripts/kendo/2016.1.112/kendo.aspnetmvc.min.js",
-                        "~/Scripts/kendo/2016.1.112/kendo.timezones.min.js"));
+                        "~/Scripts/kendo/2016.1.112/kendo.timezones.min.js",
+                        "~/Scripts/kendo/2016.1.112/console.js",
+                        "~/Scripts/kendo/2016.1.112/prettify.js"));
 
             //bundles.Add(new ScriptBundle("~/bundles/demo").Include(
             //            "~/Scripts/kendo/2016.1.112/console.js",

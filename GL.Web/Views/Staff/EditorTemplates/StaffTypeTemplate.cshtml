@@ -1,0 +1,7 @@
+﻿@model GL.Model.StaffTypeView
+
+@(Html.Kendo().DropDownListFor(m => m)
+            .DataValueField("StaffTypeId")
+        .DataTextField("Name")
+        .BindTo((System.Collections.IEnumerable)ViewData["stafftype"])
+)

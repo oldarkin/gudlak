@@ -11,7 +11,7 @@ namespace GL.Web.Controllers.Dispatcher
         // GET: Customer
         public ActionResult Index()
         {
-            return View("~/Views/Dispatcher/Customer/Index.cshtml");
+            return View();
         }
     }
 }

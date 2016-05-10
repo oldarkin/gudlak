@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="gudlakModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="gudlakModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cars">
           <Key>
             <PropertyRef Name="id" />
@@ -50,6 +50,9 @@
           <Property Name="postal_address" Type="varchar" MaxLength="255" />
           <Property Name="fact_address" Type="varchar" MaxLength="255" />
           <Property Name="phone" Type="varchar" MaxLength="32" />
+          <Property Name="zip" Type="nvarchar" MaxLength="6" />
+          <Property Name="city" Type="nvarchar" MaxLength="128" />
+          <Property Name="inn" Type="nvarchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="Drivers">
           <Key>
@@ -506,8 +509,7 @@
             <End Role="Staff" EntitySet="Staff" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="gudlakModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -567,6 +569,9 @@
           <Property Name="phone" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__customer__2D27B809" FromRole="Customer" ToRole="Orders" />
           <NavigationProperty Name="Route" Relationship="Self.FK__Route__customeri__22AA2996" FromRole="Customer" ToRole="Route" />
+          <Property Name="zip" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="inn" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Drivers">
           <Key>
@@ -1096,6 +1101,9 @@
           <EntitySetMapping Name="Customer">
             <EntityTypeMapping TypeName="gudlakModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="inn" ColumnName="inn" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="fullname" ColumnName="fullname" />
                 <ScalarProperty Name="shortname" ColumnName="shortname" />

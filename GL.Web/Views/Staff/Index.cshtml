@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Dispatcher/_LayoutDispatcher.cshtml";
+    Layout = "~/Views/_LayoutDispatcher.cshtml";
 }
 
 @section head
@@ -10,20 +10,24 @@
 
 <div class="row">
     <div class="col-md-9">
-        @(Html.Kendo().Grid<GL.Model.StaffView>()
+       @(Html.Kendo().Grid<GL.Model.StaffView>()
         .Name("grid")
         .Columns(columns =>
         {
-            columns.Bound(c => c.Surname).Title("Фамиилия");
-            columns.Bound(c => c.Name).Title("Имя");
-            columns.Bound(c => c.Patronymic).Title("Отчество").Width(150);
-            columns.ForeignKey(p => p.StaffTypeId, (System.Collections.IEnumerable)ViewData["stafftype"], "StaffTypeId", "Name")
-                        .Title("Тип").Width(200); ;
+            columns.Bound(c => c.Surname);
+            columns.Bound(c => c.Name);
+            columns.Bound(c => c.Patronymic);     
+            columns.Bound(c => c.StaffType).ClientTemplate("#=StaffType.Name#");
+            columns.Command(command =>
+            {
+                command.Edit().Text("Редактировать");
+                command.Destroy().Text("Удалить");
+            });
         })
-        .HtmlAttributes(new { style = "height: 550px;" })
         .ToolBar(toolBar =>
         {
-           toolBar.Create();
+           toolBar.Create().Text("Добавить");
+           toolBar.Save().SaveText("Сохранить").CancelText("Отмена");
         })
         .Editable(editable => editable.Mode(GridEditMode.InCell))
         .Scrollable()
@@ -32,21 +36,23 @@
             .Refresh(true)
             .PageSizes(true)
             .ButtonCount(5))
-                    .DataSource(dataSource => dataSource
+        .HtmlAttributes(new { style = "height:550px;" })
+        .DataSource(dataSource => dataSource
                 .Ajax()
+                .Batch(true)
                 .PageSize(20)
                 .ServerOperation(false)
                 .Events(events => events.Error("errorHandler"))
                 .Model(model =>
                 {
                     model.Id(p => p.StaffId);
-                    //model.Field(p => p.ProductID).Editable(false);
-                    model.Field(p => p.StaffTypeId).DefaultValue(1);
+                    model.Field(p => p.StaffId).Editable(false);
+                    model.Field(p => p.StaffType).DefaultValue(ViewData["defaultstafftype"] as GL.Model.StaffTypeView);
                 })
                 .Read(read => read.Action("StaffRead", "Staff"))
-                .Update(update => update.Action("ForeignKeyColumn_Update", "Grid"))
-                .Create(create => create.Action("ForeignKeyColumn_Create", "Grid"))
-                .Destroy(destroy => destroy.Action("ForeignKeyColumn_Destroy", "Grid"))
+                .Update(update => update.Action("StaffRead_Update", "Staff"))
+                .Create(create => create.Action("StaffCreate", "Staff"))
+                .Destroy(destroy => destroy.Action("StaffDelete", "Staff"))
             )
         )
     </div>
