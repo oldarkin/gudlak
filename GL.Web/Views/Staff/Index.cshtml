@@ -50,7 +50,7 @@
                     model.Field(p => p.StaffType).DefaultValue(ViewData["defaultstafftype"] as GL.Model.StaffTypeView);
                 })
                 .Read(read => read.Action("StaffRead", "Staff"))
-                .Update(update => update.Action("StaffRead_Update", "Staff"))
+                .Update(update => update.Action("StaffUpdate", "Staff"))
                 .Create(create => create.Action("StaffCreate", "Staff"))
                 .Destroy(destroy => destroy.Action("StaffDelete", "Staff"))
             )

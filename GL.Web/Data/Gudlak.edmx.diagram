@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="2c41075184b740f28d49969052b3058f" Name="Diagram1">
-        <EntityTypeShape EntityType="gudlakModel.Cars" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="gudlakModel.Cars" Width="1.5" PointX="0.625" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="gudlakModel.CarsAP" Width="1.5" PointX="3" PointY="17.5" IsExpanded="true" />
         <EntityTypeShape EntityType="gudlakModel.CarsToDrivers" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="gudlakModel.CarsType" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="true" />

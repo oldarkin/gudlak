@@ -66,7 +66,7 @@ namespace GL.Web.Controllers.Dispatcher
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Staff_Update([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<StaffView> staffs)
+        public ActionResult StaffUpdate([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<StaffView> staffs)
         {
             if (staffs != null && ModelState.IsValid)
             {

@@ -24,10 +24,12 @@ namespace GL.Web.Data
         }
     
         public int id { get; set; }
-        public string fullname { get; set; }
-        public string shortname { get; set; }
         public string reg_number { get; set; }
         public int carstypeid { get; set; }
+        public string name { get; set; }
+        public string manufacturer { get; set; }
+        public int reg_number_region { get; set; }
+        public string garage_number { get; set; }
     
         public virtual CarsType CarsType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

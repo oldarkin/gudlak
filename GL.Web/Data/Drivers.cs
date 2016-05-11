@@ -32,6 +32,7 @@ namespace GL.Web.Data
         public string passport_ser { get; set; }
         public string passport_num { get; set; }
         public string passport_info { get; set; }
+        public Nullable<System.DateTime> prava_deistvie_do { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CarsToDrivers> CarsToDrivers { get; set; }
