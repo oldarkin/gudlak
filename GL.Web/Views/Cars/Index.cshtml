@@ -1,16 +1,18 @@
-﻿@model IList<GL.Model.Cars>
-@{
+﻿@{
     ViewBag.Title = "Транспортные средства";
     Layout = "~/Views/_LayoutDispatcher.cshtml";
 }
 
-<h3>Справочник транспортных средств</h3>
+@section head
+{
+    <h1>Транспортные средства</h1>
+}
 
-<div id="grid">
+<div class="row">
 
 </div>
 
-@section masterjs
+@section js
 {
-    <script type="text/javascript" src="@Url.Content("/Scripts/dispatcher/cars.js")"></script>
+    
 }
