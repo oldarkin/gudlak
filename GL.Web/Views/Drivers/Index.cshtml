@@ -9,10 +9,73 @@
 }
 
 <div class="row">
-
+    <div class="col-md-9">
+        @(Html.Kendo().Grid<GL.Model.DriversView>()
+        .Name("grid")
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.Surname);
+            columns.Bound(c => c.Name);
+            columns.Bound(c => c.Patronymic);
+            columns.Bound(c => c.PravaNum);
+            columns.Bound(c => c. TabNumber);
+            
+            columns.Command(command =>
+            {
+                command.Edit().Text("Редактировать");
+                command.Destroy().Text("Удалить");
+            });
+        })
+        .ToolBar(toolBar =>
+        {
+            toolBar.Create().Text("Добавить");
+            toolBar.Save().SaveText("Сохранить").CancelText("Отмена");
+        })
+        .Editable(editable => editable.Mode(GridEditMode.InCell))
+        .Scrollable()
+        .Sortable()
+        .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(5))
+        .HtmlAttributes(new { style = "height:550px;" })
+        .DataSource(dataSource => dataSource
+                .Ajax()
+                .Batch(true)
+                .PageSize(20)
+                .ServerOperation(false)
+                .Events(events => events.Error("errorHandler"))
+                .Model(model =>
+                {
+                    model.Id(p => p.DriversId);
+                    model.Field(p => p.DriversId).Editable(false);
+                })
+                .Read(read => read.Action("DriversRead", "Drivers"))
+                .Update(update => update.Action("DriverUpdate", "Drivers"))
+                .Create(create => create.Action("DriverCreate", "Drivers"))
+                .Destroy(destroy => destroy.Action("DriverDelete", "Drivers"))
+            )
+        )
+    </div>
 </div>
+
+
 
 @section js
 {
-
+    <script type="text/javascript">
+        function errorHandler(e) {
+            if (e.errors) {
+                var message = "Errors:\n";
+                $.each(e.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                alert(message);
+            }
+        }
+    </script>
 }

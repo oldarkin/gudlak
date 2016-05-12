@@ -9,3 +9,74 @@
     <h1>Клинты</h1>
 }
 
+<div class="row">
+    <div class="col-md-9">
+        @(Html.Kendo().Grid<GL.Model.CustomerView>()
+        .Name("grid")
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.ShortName);
+            columns.Bound(c => c.FullName);
+            columns.Bound(c => c.Phone);
+            columns.Bound(c => c.City);
+            columns.Bound(c => c.Address);
+            columns.Bound(c => c.Zip);
+            columns.Bound(c => c.Inn);
+            
+            columns.Command(command =>
+            {
+                command.Edit().Text("Редактировать");
+                command.Destroy().Text("Удалить");
+            });
+        })
+        .ToolBar(toolBar =>
+        {
+            toolBar.Create().Text("Добавить");
+            toolBar.Save().SaveText("Сохранить").CancelText("Отмена");
+        })
+        .Editable(editable => editable.Mode(GridEditMode.InCell))
+        .Scrollable()
+        .Sortable()
+        .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(5))
+        .HtmlAttributes(new { style = "height:550px;" })
+        .DataSource(dataSource => dataSource
+                .Ajax()
+                .Batch(true)
+                .PageSize(20)
+                .ServerOperation(false)
+                .Events(events => events.Error("errorHandler"))
+                .Model(model =>
+                {
+                    model.Id(p => p.CustomerId);
+                    model.Field(p => p.CustomerId).Editable(false);
+                })
+                .Read(read => read.Action("CustomerRead", "Customer"))
+                .Update(update => update.Action("CustomerUpdate", "Customer"))
+                .Create(create => create.Action("CustomerCreate", "Customer"))
+                .Destroy(destroy => destroy.Action("CustomerDelete", "Customer"))
+            )
+        )
+    </div>
+</div>
+
+@section js
+{
+    <script type="text/javascript">
+        function errorHandler(e) {
+            if (e.errors) {
+                var message = "Errors:\n";
+                $.each(e.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                alert(message);
+            }
+        }
+    </script>
+}

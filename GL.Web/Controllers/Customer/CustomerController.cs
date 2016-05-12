@@ -43,7 +43,7 @@ namespace GL.Web.Controllers.Dispatcher
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult CusomerCreate([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CustomerView> customers)
+        public ActionResult CustomerCreate([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CustomerView> customers)
         {
             var results = new List<CustomerView>();
 

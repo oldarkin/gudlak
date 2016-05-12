@@ -1,0 +1,7 @@
+﻿@model GL.Model.CarsTypeView
+
+@(Html.Kendo().DropDownListFor(m => m)
+        .DataValueField("CarsTypeId")
+        .DataTextField("Name")
+        .BindTo((System.Collections.IEnumerable)ViewData["carstype"])
+)
