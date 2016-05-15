@@ -1,0 +1,8 @@
+﻿@model IEnumerable<GL.Model.CarsView>
+
+@(
+ Html.Kendo().MultiSelectFor(m => m)
+        .DataTextField("Name")
+        .DataValueField("CarsId")
+            .BindTo((IEnumerable<GL.Model.CarsView>)ViewData["cars"])
+)

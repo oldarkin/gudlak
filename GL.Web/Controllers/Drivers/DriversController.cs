@@ -15,6 +15,7 @@ namespace GL.Web.Controllers.Dispatcher
         // GET: Drivers
         public ActionResult Index()
         {
+            PopulateCars();
             return View();
         }
 
@@ -52,6 +53,19 @@ namespace GL.Web.Controllers.Dispatcher
                         var addedDriver = context.Drivers.Add(d);
                         driver.DriversId = addedDriver.id;
 
+                        foreach (var item in driver.Cars)
+                        {
+                            CarsToDrivers newcd = new CarsToDrivers();
+                            newcd.id = -1;
+                            newcd.Cars = context.Cars.SingleOrDefault(data => data.id == item.CarsId);
+                            newcd.carsid = item.CarsId;
+
+                            newcd.Drivers = addedDriver;
+                            newcd.driversid = addedDriver.id;
+
+                            addedDriver.CarsToDrivers.Add(newcd);
+                        }
+
                         results.Add(driver);
                     }
 
@@ -67,7 +81,7 @@ namespace GL.Web.Controllers.Dispatcher
         public ActionResult DriverUpdate([DataSourceRequest] DataSourceRequest request,
             [Bind(Prefix = "models")]IEnumerable<DriversView> drivers)
         {
-            if (drivers != null && ModelState.IsValid)
+            if (drivers != null)
             {
                 using (var context = new gudlakEntities1())
                 {
@@ -87,6 +101,32 @@ namespace GL.Web.Controllers.Dispatcher
                             curent.passport_num = driver.PassportNum;
                             curent.passport_info = driver.PassportInfo;
 
+                            var existsCarsId = curent.CarsToDrivers.Select(data => data.carsid).ToList();
+
+                            var deletedCars = existsCarsId.Except(driver.Cars.Select(data => data.CarsId).ToList());
+                            var newCars = driver.Cars.Select(data => data.CarsId).ToList().Except(existsCarsId);
+
+                            // add new
+                            foreach (var item in newCars)
+                            {
+                                CarsToDrivers newcd = new CarsToDrivers();
+                                newcd.id = -1;
+                                newcd.Cars = context.Cars.SingleOrDefault(data => data.id == item);
+                                newcd.carsid = item;
+
+                                newcd.Drivers = curent;
+                                newcd.driversid = curent.id;
+
+                                curent.CarsToDrivers.Add(newcd);
+                            }
+
+                            foreach (var item in deletedCars)
+                            {
+                                var delcd = curent.CarsToDrivers.Where(data => data.carsid == item && data.driversid == curent.id).SingleOrDefault();
+                                context.CarsToDrivers.Attach(delcd);
+                                context.CarsToDrivers.Remove(delcd);
+                            }
+
                             context.SaveChanges();
                         }
                     }
@@ -95,6 +135,7 @@ namespace GL.Web.Controllers.Dispatcher
             }
 
             return Json(drivers.ToDataSourceResult(request, ModelState));
+            //return Json(drivers.ToDataSourceResult(request));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -119,6 +160,7 @@ namespace GL.Web.Controllers.Dispatcher
         private static IEnumerable<DriversView> GetDrivers()
         {
             var context = new gudlakEntities1();
+
             return context.Drivers.Select(data => new DriversView
                     {
                         DriversId = data.id,
@@ -131,9 +173,34 @@ namespace GL.Web.Controllers.Dispatcher
                         PraveDataPo = data.prava_deistvie_do,
                         PassportSer = data.passport_ser,
                         PassportNum = data.passport_num,
-                        PassportInfo = data.passport_info
+                        PassportInfo = data.passport_info,
+                        Cars = data.CarsToDrivers.Where(d => d.driversid == data.id)
+                                    .Select(d => new CarsView()
+                                    {
+                                        CarsId = d.carsid,
+                                        Name = d.Cars.name,
+                                        RegNumber = d.Cars.reg_number,
+                                        RegNumberRegion = d.Cars.reg_number_region,
+                                        Manufacturer = d.Cars.manufacturer,
+                                        GarageNumber = d.Cars.garage_number,
+                                        CarsTypeId = d.Cars.carstypeid,
+                                        CarsType = new CarsTypeView() { CarsTypeId = d.Cars.CarsType.id, Name = d.Cars.CarsType.name }
+                                    })
                     }
                 );
+        }
+
+        private void PopulateCars()
+        {
+            var context = new gudlakEntities1();
+
+            var cl = context.Cars.Select(data => new CarsView()
+            {
+                CarsId = data.id,
+                Name = data.name
+            });
+
+            ViewData["cars"] = cl;
         }
 
 

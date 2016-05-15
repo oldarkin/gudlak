@@ -11,11 +11,6 @@ namespace GL.Web.Controllers
     {
         public ActionResult Index()
         {
-            using (var context = new gudlakEntities1())
-            {
-                var data = context.CarsType.ToList();
-                Guid gd = new Guid();
-            }
             return View();
         }
 

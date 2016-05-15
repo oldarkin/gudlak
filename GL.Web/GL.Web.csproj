@@ -2295,6 +2295,7 @@
     <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
     <Content Include="Views\Cars\EditorTemplates\CarsTypeTemplate.cshtml" />
+    <Content Include="Views\Drivers\EditorTemplates\CarsEditor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
