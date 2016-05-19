@@ -1,0 +1,21 @@
+﻿<div id="megaStore">
+    @(Html.Kendo().Menu()
+        .Name("Menu")
+        .Items(items =>
+             {
+                 items.Add().Text("Расстановка").Action("Index", "Dispatcher");
+                 items.Add().Text("Путевые листы").Action("Index", "Order");
+                 items.Add().Text("Маршруты").Action("Index", "Route");
+                 items.Add().Text("Справочники").Items(
+                     children =>
+                     {
+                         children.Add().Text("Водители").Action("Index", "Drivers");
+                         children.Add().Text("Автомобили").Action("Index","Cars");
+                         children.Add().Text("Клиенты").Action("Index", "Customer");
+                         children.Add().Text("Сотрудники").Action("Index", "Staff");
+                     }
+                     );
+             }
+        )
+)
+</div>
